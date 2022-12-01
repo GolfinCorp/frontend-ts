@@ -8,20 +8,24 @@ import { CredentialsT } from "@/types";
 
 const useAuth = () => {
   const { setAuthToken, setUser } = useContext(AuthContext);
-  const { handleAsyncToast } = useToastNotification();
+  const { handleAsyncToast, handleErrorToast } = useToastNotification();
   const login = async (credentials: CredentialsT) => {
-    const response = await handleAsyncToast(
-      axiosInstance.post("/users/login/", credentials),
-      { title: "Bienvenido", description: `${credentials.email}` },
-      "Iniciando sesión"
-    );
-    const token = response.data.token;
-    const user = jwt(token);
+    try {
+      const response = await handleAsyncToast(
+        axiosInstance.post("/users/login/", credentials),
+        { title: "Bienvenido", description: `${credentials.email}` },
+        "Iniciando sesión"
+      );
+      const token = response.data.token;
+      const user = jwt(token);
 
-    setAuthToken(token);
-    setUser(user);
-    setLocalStorage("accessToken", token);
-    return user;
+      setAuthToken(token);
+      setUser(user);
+      setLocalStorage("accessToken", token);
+      return user;
+    } catch (error) {
+      handleErrorToast(error);
+    }
   };
 
   const logout = async () => {

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "@/hooks";
-
-const RequireAuth = ({ allowedRoles }) => {
+type props = {
+  allowedRoles: string;
+};
+const RequireAuth = ({ allowedRoles }: props) => {
   const [loaded, setLoaded] = useState(false);
   const { user } = useAuth();
   const location = useLocation();

@@ -1,4 +1,5 @@
-import { useToast } from '@chakra-ui/react';
+import { useToast } from "@chakra-ui/react";
+import { handleToastT, asyncToastT } from "./types/notification.types";
 /**
  *
  * @returns handleToast, handleErrorToast, handleAsyncToast
@@ -7,25 +8,32 @@ import { useToast } from '@chakra-ui/react';
 const useToastNotification = () => {
   const toast = useToast();
 
-  const handleToast = (status, content, duration = 3000) => {
+  const handleToast: handleToastT = (
+    status = "info",
+    content,
+    duration = 3000
+  ) => {
     const id = content.title.trim();
     if (!toast.isActive(id))
       toast({
         id,
         title: content.title,
         description: content.description,
-        status,
-        position: 'bottom-left',
+        status: status,
+        position: "bottom-left",
         duration,
-        isClosable: true
+        isClosable: true,
       });
   };
 
   // Used to handle server errors
-  const handleErrorToast = (error) => {
-    handleToast('error', {
-      title: `Ha ocurrido un error ${error.response.status}`,
-      description: `${error.response.data.error || error.message}`
+  const handleErrorToast = (error: {
+    response: { status: any; data: { error: any } };
+    message: string;
+  }) => {
+    handleToast("error", {
+      title: `Ha ocurrido un error ${error.response.status || error}`,
+      description: `${error.response.data.error || error.message}`,
     });
   };
 
@@ -36,7 +44,7 @@ const useToastNotification = () => {
   //   return randomMoji;
   // };
 
-  const handleAsyncToast = async (callBack, msg, loadMsg) => {
+  const handleAsyncToast: asyncToastT = async (callBack, msg, loadMsg) => {
     /**
      * @params
      * - callBack: API consuming function called
@@ -45,27 +53,23 @@ const useToastNotification = () => {
      * @returns async response || False
      * handles an async request and notifies user of its status while its processing
      */
-    handleToast(
-      'info',
-      {
-        title: loadMsg,
-        description: ''
-      },
-      null
-    );
+    handleToast("loading", {
+      title: loadMsg,
+      description: "",
+    });
     const res = await callBack;
-    if (String(res.status)[0] === '2') {
+    if (String(res.status)[0] === "2") {
       toast.close(loadMsg.trim());
-      handleToast('success', {
+      handleToast("success", {
         title: msg.title,
-        description: msg.description
+        description: msg.description,
       });
       return res;
     } else {
       toast.close(loadMsg.trim());
-      handleToast('error', {
+      handleToast("error", {
         title: `Ha ocurrido un problema ${res.status}`,
-        description: `${res.data.error}`
+        description: `${res.data.error}`,
       });
       return false;
     }
