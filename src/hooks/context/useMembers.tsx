@@ -1,6 +1,6 @@
-import { useContext } from 'react';
-import { MembersContext } from '@/contexts';
-import { useAxiosPrivate, useToastNotification } from '@/hooks';
+import { useContext } from "react";
+import { MembersContext } from "@/contexts";
+import { useAxiosPrivate, useToastNotification } from "@/hooks";
 const useMembers = () => {
   const { members, setMembers } = useContext(MembersContext);
   const { get, post, patch, axiosDelete } = useAxiosPrivate();
@@ -13,21 +13,21 @@ const useMembers = () => {
      * @return boolean { true: success || false: failure }
      */
     const successMsg = {
-      title: 'Exito!',
-      description: 'Los usuarios se han cargado correctamente'
+      title: "Exito!",
+      description: "Los usuarios se han cargado correctamente",
     };
     try {
       const membersResponse = members
-        ? await get('/members')
+        ? await get("/members")
         : await handleAsyncToast(
-            get('/members'),
+            get("/members"),
             successMsg,
-            'Cargando Miembros'
+            "Cargando Miembros"
           );
       if (!membersResponse) return;
       setMembers(membersResponse.data.members);
       return membersResponse.data.members;
-    } catch (error) {
+    } catch (error: any) {
       handleErrorToast(error);
     }
   };
@@ -41,16 +41,16 @@ const useMembers = () => {
      * }
      */
     if (!member) {
-      handleToast('error', { title: 'Member data is necesary' });
+      handleToast("error", { title: "Member data is necesary" });
     }
     try {
       const createResponse = await handleAsyncToast(
-        post('members', { ...member }),
+        post("members", { ...member }),
         {
-          title: 'Exito',
-          description: `${member.firstName} agregado como miembro`
+          title: "Exito",
+          description: `${member.firstName} agregado como miembro`,
         },
-        'Creando miembro'
+        "Creando miembro"
       );
       if (!createResponse) return false;
       else {
@@ -75,18 +75,18 @@ const useMembers = () => {
      * id: int
      */
     if (!member || !id) {
-      handleToast('error', { title: 'Member data is necesary' });
+      handleToast("error", { title: "Member data is necesary" });
     }
     try {
       const updateResponse = await handleAsyncToast(
         patch(`members/${id}`, {
-          ...member
+          ...member,
         }),
         {
-          title: 'Exito',
-          description: `Miembro modificado`
+          title: "Exito",
+          description: `Miembro modificado`,
         },
-        'Modificando Miembro'
+        "Modificando Miembro"
       );
       if (!updateResponse) return false;
       else {
@@ -107,16 +107,16 @@ const useMembers = () => {
      * @params id: int
      */
     if (!id) {
-      handleToast('error', { title: 'Member data is necesary' });
+      handleToast("error", { title: "Member data is necesary" });
     }
     try {
       const updateResponse = await handleAsyncToast(
         axiosDelete(`members/${id}`),
         {
-          title: 'Exito',
-          description: `Miembro Eliminado`
+          title: "Exito",
+          description: `Miembro Eliminado`,
         },
-        'Eliminando miembro'
+        "Eliminando miembro"
       );
       if (!updateResponse) return false;
       else {
@@ -134,7 +134,7 @@ const useMembers = () => {
     createMember,
     updateMember,
     deleteMember,
-    ...useContext(MembersContext)
+    ...useContext(MembersContext),
   };
 };
 

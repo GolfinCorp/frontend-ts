@@ -1,12 +1,15 @@
-import { useContext } from 'react';
-import { GamesContext } from '@/contexts';
-import { useAxiosPrivate, useToastNotification, useCalendar } from '@/hooks';
+import { useContext } from "react";
+import { GamesContext } from "@/contexts";
+import { useAxiosPrivate, useToastNotification, useCalendar } from "@/hooks";
+import { GamesContextT } from "@/contexts/types.context";
 
-const gamesUrl = (endpoint) => {
-  return endpoint ? `games/${endpoint}` : 'games';
+type gamesUrlT = (endpoint: string) => string;
+const gamesUrl: gamesUrlT = (endpoint) => {
+  return endpoint ? `games/${endpoint}` : "games";
 };
+
 const useGames = () => {
-  const { setGames, games } = useContext(GamesContext);
+  const { setGames, games } = useContext(GamesContext) as GamesContextT;
   const { selectedDate } = useCalendar();
   const { handleAsyncToast, handleErrorToast } = useToastNotification();
   const { get } = useAxiosPrivate();
@@ -21,24 +24,24 @@ const useGames = () => {
     }
     try {
       const gamesRes = await handleAsyncToast(
-        get(gamesUrl('filter'), {
+        get(gamesUrl("filter"), {
           params: {
             startDate: date,
-            endDate: new Date(date - 1)
-          }
+            endDate: new Date(date - 1),
+          },
         }),
         {
-          title: 'Exito',
-          description: 'Juegos cargados'
+          title: "Exito",
+          description: "Juegos cargados",
         },
-        'Cargando Juegos'
+        "Cargando Juegos"
       );
 
       if (!gamesRes) return;
       // Generate game object
       const newGameDate = {
         id: date.getTime(), // Will be used to find and filter gameDates
-        games: gamesRes.data
+        games: gamesRes.data,
       };
       setGames(games ? [...games, newGameDate] : [newGameDate]);
       return true;

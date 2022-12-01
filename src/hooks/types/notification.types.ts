@@ -1,3 +1,5 @@
+import { AxiosResponse } from "axios";
+
 export type toastMsgT = {
   title: string;
   description?: string;
@@ -10,18 +12,7 @@ export type statusT =
   | "loading"
   | undefined;
 
-type asyncResponseT = {} | false;
-
-interface data {
-  [index: string]: any;
-  error?: string;
-}
-interface response {
-  [index: string]: number | string | object | undefined;
-  status: number;
-  data?: data;
-  error?: string;
-}
+type asyncResponseT = any | false;
 
 export type handleToastT = (
   status: statusT,
@@ -30,7 +21,7 @@ export type handleToastT = (
 ) => void;
 
 export type asyncToastT = (
-  callback: response,
+  callback: Promise<AxiosResponse<any, any>>,
   msg: toastMsgT,
   loadMsg: string
 ) => asyncResponseT;

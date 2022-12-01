@@ -1,6 +1,6 @@
-import { Button, Grid, Flex } from '@chakra-ui/react';
-import Logo from '@/components/atoms/icons/Logo';
-import { useNavigate } from 'react-router-dom';
+import { Button, Grid, Flex } from "@chakra-ui/react";
+import { Logo } from "@/components/atoms";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = ({ menuItems }) => {
   const { menu, setting } = menuItems;
@@ -16,11 +16,11 @@ const Sidebar = ({ menuItems }) => {
         <Grid gap="5">
           {menu?.map((item, index) => (
             <Button
-              variant={'ghost'}
+              variant={"ghost"}
               key={`${index}${item.link}`}
               justifyContent="start"
               gap="1"
-              alignItems={'center'}
+              alignItems={"center"}
               leftIcon={item.icon}
               onClick={() => handleRouter(item.link)}
             >
@@ -31,11 +31,11 @@ const Sidebar = ({ menuItems }) => {
         <Grid gap="2">
           {setting?.map((item, index) => (
             <Button
-              variant={'ghost'}
+              variant={"ghost"}
               key={`${index}${item.link}`}
               justifyContent="start"
               gap="1"
-              alignItems={'center'}
+              alignItems={"center"}
               leftIcon={item.icon}
               onClick={item.onClick ?? (() => handleRouter(item.link))}
             >

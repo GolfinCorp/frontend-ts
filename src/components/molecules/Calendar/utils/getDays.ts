@@ -1,4 +1,4 @@
-const createClamp = (min, max) => {
+const createClamp = (min: number, max: number): ((num: number) => number) => {
   return (num) => {
     if (num < min) return max;
     if (num > max) return min;
@@ -6,7 +6,12 @@ const createClamp = (min, max) => {
   };
 };
 
-const fillMonth = (days, prevMonth, nextMonth) => {
+type fillMonthT = (
+  days: Date[],
+  prevMonth: Date[],
+  nextMonth: Date[]
+) => Date[];
+const fillMonth: fillMonthT = (days, prevMonth, nextMonth) => {
   /**
    * @params array of days
    * @returns array of days with blank spaces filled with null
@@ -31,7 +36,7 @@ const fillMonth = (days, prevMonth, nextMonth) => {
   return days;
 };
 
-const getDatesOfMonth = (date) => {
+const getDatesOfMonth = (date: Date): Date[] => {
   const daysOfMonth = [];
   const month = date.getMonth();
   while (date.getMonth() === month) {
@@ -41,7 +46,8 @@ const getDatesOfMonth = (date) => {
   return daysOfMonth;
 };
 
-const addMonths = (date, numOfMonths) => {
+type addMonthsT = (date: Date, numOfMonths: number) => Date;
+const addMonths: addMonthsT = (date, numOfMonths) => {
   const dateCopy = new Date(date.getTime());
 
   dateCopy.setMonth(dateCopy.getMonth() + numOfMonths);
@@ -49,7 +55,8 @@ const addMonths = (date, numOfMonths) => {
   return dateCopy;
 };
 
-export const getDays = (year, month) => {
+type getDaysT = (year: number, month: number) => Date[];
+export const getDays: getDaysT = (year, month) => {
   /**
    * @params
    *    [year:int] with current year

@@ -69,7 +69,7 @@ const useToastNotification = () => {
       toast.close(loadMsg.trim());
       handleToast("error", {
         title: `Ha ocurrido un problema ${res.status}`,
-        description: `${res.data?.error || res.error}`,
+        description: `${res.data?.error}`,
       });
       return false;
     }

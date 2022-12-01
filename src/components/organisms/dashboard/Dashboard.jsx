@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef } from "react";
 import {
   SimpleGrid,
   GridItem,
@@ -9,20 +9,20 @@ import {
   DrawerContent,
   IconButton,
   DrawerCloseButton,
-  useDisclosure
-} from '@chakra-ui/react';
+  useDisclosure,
+} from "@chakra-ui/react";
 import {
   MdCalendarToday,
   MdAutoGraph,
   MdOutlineSupervisorAccount,
   MdSettings,
   MdMenu,
-  MdLogout
-} from 'react-icons/md';
-import Sidebar from './Sidebar';
-import Logo from '@/components/atoms/icons/Logo';
-import { Outlet } from 'react-router-dom';
-import { useAuth } from '@/hooks';
+  MdLogout,
+} from "react-icons/md";
+import Sidebar from "./Sidebar";
+import { Logo } from "@/components/atoms";
+import { Outlet } from "react-router-dom";
+import { useAuth } from "@/hooks";
 
 const Dashboard = () => {
   const { logout } = useAuth();
@@ -31,42 +31,42 @@ const Dashboard = () => {
   const mockItems = {
     menu: [
       {
-        title: 'Calendario',
-        link: '/admin',
-        icon: <MdCalendarToday />
+        title: "Calendario",
+        link: "/admin",
+        icon: <MdCalendarToday />,
       },
       {
-        title: 'Miembros',
-        link: '/admin/members',
-        icon: <MdOutlineSupervisorAccount />
+        title: "Miembros",
+        link: "/admin/members",
+        icon: <MdOutlineSupervisorAccount />,
       },
       {
-        title: 'Pagos',
-        link: '/admin/payments',
-        icon: <MdAutoGraph />
-      }
+        title: "Pagos",
+        link: "/admin/payments",
+        icon: <MdAutoGraph />,
+      },
     ],
     setting: [
       {
-        title: 'Configuración',
-        link: '/admin/settings',
-        icon: <MdSettings />
+        title: "Configuración",
+        link: "/admin/settings",
+        icon: <MdSettings />,
       },
       {
-        title: 'Cerrar Sesión',
-        link: '',
+        title: "Cerrar Sesión",
+        link: "",
         icon: <MdLogout />,
-        onClick: logout
-      }
-    ]
+        onClick: logout,
+      },
+    ],
   };
   return (
     <>
       <Flex
-        display={{ base: 'flex', md: 'none' }}
+        display={{ base: "flex", md: "none" }}
         p="5"
         w="100%"
-        justify={'space-between'}
+        justify={"space-between"}
         align="center"
       >
         <Box>
@@ -77,14 +77,14 @@ const Dashboard = () => {
             onClick={onOpen}
           />
         </Box>
-        <Box justifySelf={'center'}>
+        <Box justifySelf={"center"}>
           <Logo />
         </Box>
       </Flex>
       <SimpleGrid columns={12}>
         <GridItem
           colSpan={{ base: 0, md: 3, lg: 2 }}
-          display={{ base: 'none', md: 'grid' }}
+          display={{ base: "none", md: "grid" }}
           h="80vh"
         >
           <Box p="5" h="100%">

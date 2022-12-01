@@ -1,16 +1,22 @@
-import React from 'react';
-import { Box } from '@chakra-ui/react';
-import { getCurrentDate } from '@/helpers/getCurrentDate';
+import React from "react";
+import { Box } from "@chakra-ui/react";
+import { getCurrentDate } from "@/helpers/getCurrentDate";
 
-const Day = ({ selected, day }) => {
+type PropsT = {
+  selected: Date;
+  day: Date;
+};
+type dayColorT = (weekend: boolean, select: boolean) => string;
+
+const Day = ({ selected, day }: PropsT) => {
   // Set hours is needed to include current day
   const date = getCurrentDate();
   const prevDay = day < date;
   const isWeekend = day.getDay() === 6 || day.getDay() === 0;
-  const dayColor = (weekend, select) => {
-    if (weekend) return 'brand.100';
-    if (select) return 'brand.white';
-    return 'brand.dark';
+  const dayColor: dayColorT = (weekend, select) => {
+    if (weekend) return "brand.100";
+    if (select) return "brand.white";
+    return "brand.dark";
   };
 
   return (
@@ -30,8 +36,8 @@ const Day = ({ selected, day }) => {
           p="1"
           bgColor={
             day.getTime() === selected.getTime()
-              ? 'brand.primary'
-              : 'transparent'
+              ? "brand.primary"
+              : "transparent"
           }
           color={dayColor(isWeekend, day.getTime() === selected.getTime())}
         >

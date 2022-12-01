@@ -1,4 +1,4 @@
-import React, { ElementType } from "react";
+import React, { ElementType, RefObject } from "react";
 import {
   Drawer as ChakraDrawer,
   DrawerHeader,
@@ -9,10 +9,10 @@ import {
 import { disclosureT } from "@/types";
 
 type PropsT = disclosureT & {
-  finalFocusRef: string;
+  finalFocusRef: any;
   title: string;
   closeButton: boolean;
-  placement: string;
+  placement: any;
   children: ElementType;
 };
 const Drawer = ({
@@ -21,7 +21,7 @@ const Drawer = ({
   finalFocusRef,
   title,
   closeButton,
-  placement = "right",
+  placement,
   children,
 }: PropsT) => {
   return (

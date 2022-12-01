@@ -2,7 +2,9 @@ import AuthProvider from "./AuthProvider";
 import MembersProvider from "./MembersProvider";
 import GamesProvider from "./GamesProvider";
 import CalendarProvider from "./CalendarContext";
-const ContextsProvider = ({ children }) => {
+import { PropChildrenT } from "@/types";
+type PropsT = PropChildrenT;
+const ContextsProvider = ({ children }: PropsT) => {
   return (
     <AuthProvider>
       <CalendarProvider>

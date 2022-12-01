@@ -1,31 +1,37 @@
-import { useState, useEffect } from 'react';
-import { Box, Text, SimpleGrid, GridItem, Flex } from '@chakra-ui/react';
-import { getDays } from './utils/getDays';
-import { useToastNotification, useCalendar, useGames } from '@/hooks';
-import Day from './Day';
-import WeekHeader from './WeekHeader';
-import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-import { getCurrentDate } from '@/helpers/getCurrentDate';
+import { useState, useEffect } from "react";
+import { Box, Text, SimpleGrid, GridItem, Flex } from "@chakra-ui/react";
+import { getDays } from "./utils/getDays";
+import { useToastNotification, useCalendar, useGames } from "@/hooks";
+import Day from "./Day";
+import WeekHeader from "./WeekHeader";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import { getCurrentDate } from "@/helpers/getCurrentDate";
+import { handleToastT } from "@/hooks/types/notification.types";
 // Initial values declaration
+
+type toastErrorT = {
+  pastDay: (callback: handleToastT) => void;
+  weekend: (callback: handleToastT) => void;
+};
 
 const currentDate = getCurrentDate();
 const initialCalendarDates = getDays(
   currentDate.getFullYear(),
   currentDate.getMonth()
 );
-const errors = {
+const errors: toastErrorT = {
   pastDay: (toastManager) => {
-    toastManager('error', {
-      title: 'No disponible',
-      description: 'No puedes agendar en días anteriores'
+    toastManager("error", {
+      title: "No disponible",
+      description: "No puedes agendar en días anteriores",
     });
   },
   weekend: (toastManager) => {
-    toastManager('error', {
-      title: 'No disponible',
-      description: 'No se juega los finde :('
+    toastManager("error", {
+      title: "No disponible",
+      description: "No se juega los finde :(",
     });
-  }
+  },
 };
 
 const Calendar = () => {
@@ -33,11 +39,11 @@ const Calendar = () => {
   const { handleToast } = useToastNotification();
   const { getGamesByDate } = useGames();
   const { selectedDate, setNewSelected } = useCalendar();
-  const [daysInMonth, setDaysInMonth] = useState(initialCalendarDates);
-  const [date, setDate] = useState(currentDate);
+  const [daysInMonth, setDaysInMonth] = useState<Date[]>(initialCalendarDates);
+  const [date, setDate] = useState<Date>(currentDate);
 
   // Event handlers
-  const handleSelectDate = (day) => {
+  const handleSelectDate = (day: Date): void => {
     const isWeekend = day.getDay() === 0 || day.getDay() === 6;
     const today = getCurrentDate();
     if (day < today) return errors.pastDay(handleToast);
@@ -46,8 +52,8 @@ const Calendar = () => {
     getGamesByDate(day);
   };
 
-  const changeMonth = (differential) => {
-    const newDate = new Date(date.setMonth(date.getMonth() + differential));
+  const changeMonth = (months: number): void => {
+    const newDate = new Date(date.setMonth(date.getMonth() + months));
     setDate(newDate);
   };
 
@@ -69,8 +75,8 @@ const Calendar = () => {
         <Box onClick={() => changeMonth(-1)} cursor="pointer">
           <MdChevronLeft />
         </Box>
-        <Text textAlign={'center'} fontSize="20px">
-          {date.toLocaleString('default', { month: 'long' })}
+        <Text textAlign={"center"} fontSize="20px">
+          {date.toLocaleString("default", { month: "long" })}
         </Text>
         <Box onClick={() => changeMonth(1)} cursor="pointer">
           <MdChevronRight />
