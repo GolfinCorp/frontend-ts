@@ -3,7 +3,8 @@ import { Divider, SimpleGrid, GridItem } from "@chakra-ui/react";
 import { useGames } from "@/hooks";
 import { Searchbar } from "@/components/atoms";
 import { HourSchedule } from "@/components/organisms";
-import { Calendar, DateFlex, Events } from "@/components/molecules";
+import Events from "./components/Events/Events";
+import { Calendar, DateFlex } from "@/components/molecules";
 
 const Dashboard = () => {
   const { games, getGamesByDate } = useGames();

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, SkeletonText } from '@chakra-ui/react';
+import React from "react";
+import { Box, SkeletonText } from "@chakra-ui/react";
 const EvenSkeleton = () => {
   return (
     <Box

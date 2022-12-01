@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Text, Divider } from '@chakra-ui/react';
-import { EventCard, EventSkeleton } from '@/components/atoms';
-import { useGames } from '@/hooks';
-import { getCurrentDate } from '@/helpers/getCurrentDate';
+import React, { useState, useEffect } from "react";
+import { Text, Divider } from "@chakra-ui/react";
+import EventCard from "./eventcard/EventCard";
+import EventSkeleton from "./eventcard/EventSkeleton";
+import { useGames } from "@/hooks";
+import { getCurrentDate } from "@/helpers/getCurrentDate";
 const Events = () => {
   const { games } = useGames();
-  const [todayGames, setTodayGames] = useState(null);
+  const [todayGames, setTodayGames] = useState<any[] | null>(null);
   const today = getCurrentDate();
   useEffect(() => {
     if (todayGames || !games) return;
     const filteredGames = games.find(
-      (gameDay) => gameDay.id === today.getTime()
+      (gameDay: any) => gameDay.id === today.getTime()
     );
     setTodayGames(filteredGames.games);
   }, [games]);

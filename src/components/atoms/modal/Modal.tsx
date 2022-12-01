@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { ElementType } from "react";
 import {
   Modal as ChakraModal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalCloseButton
-} from '@chakra-ui/react';
-const Modal = ({ isOpen, onClose, title, closeButton, children }) => {
+  ModalCloseButton,
+} from "@chakra-ui/react";
+import { disclosureT } from "@/types";
+
+type PropsT = disclosureT & {
+  title: string;
+  closeButton: boolean;
+  children: ElementType;
+};
+const Modal = ({ isOpen, onClose, title, closeButton, children }: PropsT) => {
   return (
     <ChakraModal isOpen={isOpen} onClose={onClose} size="md">
       <ModalOverlay />

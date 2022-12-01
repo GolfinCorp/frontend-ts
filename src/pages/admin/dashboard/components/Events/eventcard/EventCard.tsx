@@ -1,7 +1,11 @@
-import React from 'react';
-import { Box, Text, Flex } from '@chakra-ui/react';
-import { MdAccessTime } from 'react-icons/md';
-const EventCard = ({ game }) => {
+import React from "react";
+import { Box, Text, Flex } from "@chakra-ui/react";
+import { MdAccessTime } from "react-icons/md";
+
+type PropsT = {
+  game: any;
+};
+const EventCard = ({ game }: PropsT) => {
   return (
     <Box
       p="3"
@@ -10,7 +14,7 @@ const EventCard = ({ game }) => {
       borderColor="brand.100"
       cursor="pointer"
     >
-      <Text fontSize="16px" fontWeight={'bold'}>
+      <Text fontSize="16px" fontWeight={"bold"}>
         Juego de Marco Elque Lolea
       </Text>
       <Text fontSize="14px" color="gray.500">
@@ -18,7 +22,7 @@ const EventCard = ({ game }) => {
       </Text>
       <Flex justifyContent="space-between" mt="5" alignItems="center">
         <Text color="gray.500">5 people</Text>
-        <Flex gap="2" justify={'center'} align="center" color="brand.primary">
+        <Flex gap="2" justify={"center"} align="center" color="brand.primary">
           <MdAccessTime />
           <Text>08:00 - 09:30 AM</Text>
         </Flex>

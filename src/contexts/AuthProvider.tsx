@@ -1,13 +1,10 @@
 import jwt from "jwt-decode";
 import { createContext, useState, useEffect } from "react";
 import { getLocalStorage } from "@/helpers/localStorage";
-import { UserI } from "@/types";
+import { UserI, PropChildrenT } from "@/types";
 export const AuthContext = createContext({});
 
-type props = {
-  children: React.ElementType | React.ElementType[];
-};
-const AuthProvider = ({ children }: props) => {
+const AuthProvider = ({ children }: PropChildrenT) => {
   const [user, setUser] = useState<UserI | null>(null);
   const [authToken, setAuthToken] = useState<string | null>(null);
 

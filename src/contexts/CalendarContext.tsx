@@ -1,11 +1,14 @@
-import { getCurrentDate } from '@/helpers/getCurrentDate';
-import { createContext, useState } from 'react';
+import { getCurrentDate } from "@/helpers/getCurrentDate";
+import { createContext, useState } from "react";
 
 export const CalendarContext = createContext({});
 
-const CalendarProvider = ({ children }) => {
+type propsT = {
+  children: React.ReactNode;
+};
+const CalendarProvider = ({ children }: propsT) => {
   const currentDate = getCurrentDate();
-  const [selectedDate, setSelectedDate] = useState(currentDate);
+  const [selectedDate, setSelectedDate] = useState<Date>(currentDate);
   const data = { selectedDate, setSelectedDate };
 
   return (

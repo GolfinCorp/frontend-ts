@@ -1,20 +1,29 @@
-import React from 'react';
+import React, { ElementType } from "react";
 import {
   Drawer as ChakraDrawer,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
-  DrawerCloseButton
-} from '@chakra-ui/react';
+  DrawerCloseButton,
+} from "@chakra-ui/react";
+import { disclosureT } from "@/types";
+
+type PropsT = disclosureT & {
+  finalFocusRef: string;
+  title: string;
+  closeButton: boolean;
+  placement: string;
+  children: ElementType;
+};
 const Drawer = ({
   isOpen,
   onClose,
   finalFocusRef,
   title,
   closeButton,
-  placement = 'right',
-  children
-}) => {
+  placement = "right",
+  children,
+}: PropsT) => {
   return (
     <ChakraDrawer
       isOpen={isOpen}

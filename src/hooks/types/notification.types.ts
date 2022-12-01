@@ -2,7 +2,7 @@ export type toastMsgT = {
   title: string;
   description?: string;
 };
-export type status =
+export type statusT =
   | "info"
   | "error"
   | "success"
@@ -12,14 +12,25 @@ export type status =
 
 type asyncResponseT = {} | false;
 
+interface data {
+  [index: string]: any;
+  error?: string;
+}
+interface response {
+  [index: string]: number | string | object | undefined;
+  status: number;
+  data?: data;
+  error?: string;
+}
+
 export type handleToastT = (
-  status: status,
+  status: statusT,
   content: toastMsgT,
   duration?: number
 ) => void;
 
 export type asyncToastT = (
-  callback: object,
+  callback: response,
   msg: toastMsgT,
   loadMsg: string
 ) => asyncResponseT;
