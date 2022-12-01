@@ -1,4 +1,4 @@
-import React, { ElementType, RefObject } from "react";
+import { ElementType } from "react";
 import {
   Drawer as ChakraDrawer,
   DrawerHeader,
@@ -33,9 +33,11 @@ const Drawer = ({
     >
       <DrawerOverlay />
       <DrawerContent>
-        {closeButton && <DrawerCloseButton />}
-        {title && <DrawerHeader>{title}</DrawerHeader>}
-        {children}
+        <>
+          {closeButton && <DrawerCloseButton />}
+          {title && <DrawerHeader>{title}</DrawerHeader>}
+          {children}
+        </>
       </DrawerContent>
     </ChakraDrawer>
   );

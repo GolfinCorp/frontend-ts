@@ -6,7 +6,6 @@ import { baseTheme } from "@/services";
 type Props = {
   children: JSX.Element | JSX.Element[];
 };
-
 const Providers: FC<Props> = ({ children }) => {
   return (
     <ContextsProvider>
