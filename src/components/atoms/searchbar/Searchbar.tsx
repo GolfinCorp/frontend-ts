@@ -1,9 +1,9 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { MdSearch, MdCancel } from "react-icons/md";
 
 type PropsT = {
-  searchFunc: (e: Event) => void;
+  searchFunc: (e: ChangeEvent) => void;
   searchTerm: string;
   reset: () => void;
   [index: string]: any;

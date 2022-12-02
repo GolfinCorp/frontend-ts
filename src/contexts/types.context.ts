@@ -1,9 +1,10 @@
-import { GamesByDateI, PropChildrenT, GameHistoryT } from "@/types";
-import { MemberListT, MemberT } from "@/types/members/members";
+import { GamesByDateI, GameT, GameHistoryT, MemberListT } from "@/types";
 export type GamesContextT = {
   games: GamesByDateI[];
+  gameDailySchedule: GameT[];
   history: GameHistoryT[];
   setGames: (games: GamesByDateI[]) => void;
+  setGameDailySchedule: (games: GameT[]) => void;
   setHistory: (gameHistory: GameHistoryT[]) => void;
 };
 
