@@ -2,7 +2,12 @@ import { useState } from 'react';
 import { Flex, Text, Button } from '@chakra-ui/react';
 import { useMembers } from '@/hooks';
 
-const DeleteMember = ({ onClose, id }) => {
+type propsT = {
+  onClose: () => void;
+  id: string;
+};
+
+const DeleteMember = ({ onClose, id }: propsT) => {
   const { deleteMember } = useMembers();
   const [isDeleting, setIsDeleting] = useState(false);
   const handleDelete = async () => {

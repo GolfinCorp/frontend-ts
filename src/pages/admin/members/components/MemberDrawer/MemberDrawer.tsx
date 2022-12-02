@@ -1,22 +1,36 @@
-import { DrawerBody, DrawerFooter, Box, Divider } from "@chakra-ui/react";
-import { useMembers } from "@/hooks";
-import Form from "../Form/Form";
-import UpdatePassword from "../UpdatePassword";
-import DeleteMember from "../MemberDelete/DeleteMember";
-import { MemberT } from "@/types";
-import { Resolver } from "react-hook-form";
+import { DrawerBody, DrawerFooter, Box, Divider } from '@chakra-ui/react';
+import { useMembers } from '@/hooks';
+import Form from '../Form/Form';
+import UpdatePassword from '../UpdatePassword/UpdatePassword';
+import DeleteMember from '../MemberDelete/DeleteMember';
+import { SubmitHandler } from 'react-hook-form';
 
-type FieldValues = {
+type fieldsT = {
   firstName: string;
-  lastName: string;
+  lastname: string;
   membership: number;
 };
 
-const MemberDrawer = ({ onClose, id }) => {
+type passwordT = {
+  password: string;
+  passwordConfirm: string;
+};
+
+type propsT = {
+  onClose: () => void;
+  id: string;
+};
+
+const MemberDrawer = ({ onClose, id }: propsT) => {
   const { updateMember } = useMembers();
   // Event handlers
-  const handleSubmit: Resolver<FieldValues> = async (member) => {
-    event.preventDefault();
+  const handleSubmit: SubmitHandler<fieldsT> = async (member) => {
+    const updateResponse = await updateMember(member, id);
+    if (!updateResponse) return;
+    onClose();
+  };
+
+  const passwordSubmit: SubmitHandler<passwordT> = async (member) => {
     const updateResponse = await updateMember(member, id);
     if (!updateResponse) return;
     onClose();
@@ -28,7 +42,7 @@ const MemberDrawer = ({ onClose, id }) => {
         <Form btnContent="Actualizar" submitMember={handleSubmit} />
         <Divider my="5" />
         <Box>
-          <UpdatePassword />
+          <UpdatePassword submitPassword={passwordSubmit} />
         </Box>
       </DrawerBody>
       <DrawerFooter>

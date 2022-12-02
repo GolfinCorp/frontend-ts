@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import {
   Table as ChakraTable,
   Thead,
@@ -7,7 +8,11 @@ import {
   TableContainer
 } from '@chakra-ui/react';
 
-const Table = ({ headers, children }) => {
+type propsT = {
+  headers: string[];
+  children: ReactNode;
+};
+const Table = ({ headers, children }: propsT) => {
   return (
     <TableContainer background="brand.50" borderRadius="md">
       <ChakraTable variant="simple">

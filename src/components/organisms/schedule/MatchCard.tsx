@@ -1,4 +1,3 @@
-import React from 'react';
 import { SimpleGrid, GridItem, Flex, Text, Box, Badge } from '@chakra-ui/react';
 import { MdPerson } from 'react-icons/md';
 

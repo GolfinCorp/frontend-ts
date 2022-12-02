@@ -1,7 +1,17 @@
 import { Box, Text, Input, Flex, Button } from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
-const UpdatePassword = ({ submitPassword }) => {
-  const { register, handleSubmit } = useForm();
+import { SubmitHandler, useForm } from 'react-hook-form';
+
+type fieldsT = {
+  password: string;
+  passwordConfirm: string;
+};
+
+type propsT = {
+  submitPassword: SubmitHandler<fieldsT>;
+};
+
+const UpdatePassword = ({ submitPassword }: propsT) => {
+  const { register, handleSubmit } = useForm<fieldsT>();
   return (
     <form onSubmit={handleSubmit(submitPassword)}>
       <Box my="5">

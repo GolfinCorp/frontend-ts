@@ -1,12 +1,26 @@
-import { Button, Grid, Flex } from "@chakra-ui/react";
-import { Logo } from "@/components/atoms";
-import { useNavigate } from "react-router-dom";
+import { ReactElement } from 'react';
+import { Button, Grid, Flex } from '@chakra-ui/react';
+import { Logo } from '@/components/atoms';
+import { useNavigate } from 'react-router-dom';
 
-const Sidebar = ({ menuItems }) => {
+type navItem = {
+  title: string;
+  link: string;
+  icon: ReactElement;
+  onClick?: () => void;
+};
+
+type propsT = {
+  menuItems: {
+    menu: navItem[];
+    setting: navItem[];
+  };
+};
+const Sidebar = ({ menuItems }: propsT) => {
   const { menu, setting } = menuItems;
   const navigate = useNavigate();
 
-  const handleRouter = (link) => {
+  const handleRouter = (link: string) => {
     navigate(link);
   };
   return (
@@ -16,11 +30,11 @@ const Sidebar = ({ menuItems }) => {
         <Grid gap="5">
           {menu?.map((item, index) => (
             <Button
-              variant={"ghost"}
+              variant={'ghost'}
               key={`${index}${item.link}`}
               justifyContent="start"
               gap="1"
-              alignItems={"center"}
+              alignItems={'center'}
               leftIcon={item.icon}
               onClick={() => handleRouter(item.link)}
             >
@@ -31,11 +45,11 @@ const Sidebar = ({ menuItems }) => {
         <Grid gap="2">
           {setting?.map((item, index) => (
             <Button
-              variant={"ghost"}
+              variant={'ghost'}
               key={`${index}${item.link}`}
               justifyContent="start"
               gap="1"
-              alignItems={"center"}
+              alignItems={'center'}
               leftIcon={item.icon}
               onClick={item.onClick ?? (() => handleRouter(item.link))}
             >
