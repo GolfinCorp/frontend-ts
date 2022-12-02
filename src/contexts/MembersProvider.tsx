@@ -1,13 +1,14 @@
-import { createContext, useState } from 'react';
+import { createContext, useState } from "react";
+import { MemberListT, PropChildrenT } from "@/types";
+type PropsT = PropChildrenT;
 
-export const MembersContext = createContext({});
-
-const MembersProvider = ({ children }) => {
-  const [members, setMembers] = useState(null);
+export const MembersContext = createContext<MemberListT | {}>({});
+const MembersProvider = ({ children }: PropsT) => {
+  const [members, setMembers] = useState<MemberListT | null>(null);
 
   const data = {
     members,
-    setMembers
+    setMembers,
   };
 
   return (

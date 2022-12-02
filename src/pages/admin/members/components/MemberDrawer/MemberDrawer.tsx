@@ -3,10 +3,19 @@ import { useMembers } from "@/hooks";
 import Form from "../Form/Form";
 import UpdatePassword from "../UpdatePassword";
 import DeleteMember from "../MemberDelete/DeleteMember";
+import { MemberT } from "@/types";
+import { Resolver } from "react-hook-form";
+
+type FieldValues = {
+  firstName: string;
+  lastName: string;
+  membership: number;
+};
+
 const MemberDrawer = ({ onClose, id }) => {
   const { updateMember } = useMembers();
   // Event handlers
-  const handleSubmit = async (member) => {
+  const handleSubmit: Resolver<FieldValues> = async (member) => {
     event.preventDefault();
     const updateResponse = await updateMember(member, id);
     if (!updateResponse) return;

@@ -16,10 +16,10 @@ const AuthProvider = ({ children }: PropChildrenT) => {
   };
 
   useEffect(() => {
-    const token = getLocalStorage("accessToken");
+    let token = getLocalStorage("accessToken");
 
     if (!token) return;
-    const user = jwt(token);
+    const user: UserI = jwt(token);
     setUser(user);
     setAuthToken(token);
   }, []);

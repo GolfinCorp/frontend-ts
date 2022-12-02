@@ -5,12 +5,11 @@ import MemberDrawer from "./MemberDrawer/MemberDrawer";
 
 const MembersTr = ({ member }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef();
   const { firstName, lastname, membership, status } = member;
   const drawerTitle = `Modificar ${firstName} ${lastname} / M${membership}`;
   return (
     <>
-      <Tr ref={btnRef} onClick={onOpen}>
+      <Tr onClick={onOpen}>
         <Td>{firstName}</Td>
         <Td>{lastname}</Td>
         <Td>N°{membership}</Td>
