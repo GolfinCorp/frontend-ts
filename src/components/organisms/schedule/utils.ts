@@ -1,16 +1,18 @@
 import { GameT } from '@/types';
 import { getCurrentDate } from '@/helpers/getCurrentDate';
 
-export const addHours = (numOfHours: number, date: Date): string => {
+export const addHours = (numOfHours: number, date: Date): Date => {
 	date.setTime(date.getTime() + numOfHours * 60 * 60 * 1000);
 
-	return new Date(date).toLocaleString();
+	return new Date(date);
 };
 
-export const generateAvailableGame = (date: string): GameT => {
+export const generateAvailableGame = (date: Date): GameT => {
 	return {
 		_id: 'available',
 		memberId: 'available',
+		memberName: 'available',
+
 		membership: '2',
 		date,
 		clubId: '123',
@@ -18,36 +20,6 @@ export const generateAvailableGame = (date: string): GameT => {
 		guests: []
 	};
 };
-
-export const dummyGames: GameT[] = [
-	{
-		_id: 'dummy-1',
-		memberId: 'Pedro',
-		membership: '2',
-		date: addHours(7, getCurrentDate()),
-		clubId: '123',
-		status: 'coming',
-		guests: []
-	},
-	{
-		_id: 'dummy-1',
-		memberId: 'Juan',
-		membership: '2',
-		date: addHours(8, getCurrentDate()),
-		clubId: '123',
-		status: 'coming',
-		guests: []
-	},
-	{
-		_id: 'dummy-1',
-		memberId: 'Petra',
-		membership: '2',
-		date: addHours(10, getCurrentDate()),
-		clubId: '123',
-		status: 'coming',
-		guests: []
-	}
-];
 
 export const fillGames = (
 	games: GameT[],
@@ -61,7 +33,8 @@ export const fillGames = (
 	for (let i = start; i < finish; i++) {
 		const date = getCurrentDate();
 		let checkingTime = addHours(i, date);
-		let exists = dummyGames.find((game) => checkingTime === game.date);
+
+		let exists = games.find((game) => checkingTime === new Date(game.date));
 		if (exists) continue;
 		filledGames.push(generateAvailableGame(checkingTime));
 	}

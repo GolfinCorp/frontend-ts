@@ -9,6 +9,14 @@ const gamesUrl: gamesUrlT = (endpoint) => {
 	return endpoint ? `games/${endpoint}` : 'games';
 };
 
+type addDaysT = (date: Date, numOfDays: number) => Date;
+const addDays: addDaysT = (date, numOfDays) => {
+	const dateCopy = new Date(date.getTime());
+
+	dateCopy.setDate(dateCopy.getDate() + numOfDays);
+	return dateCopy;
+};
+
 const useGames = () => {
 	const { setGames, games, setGameDailySchedule } = useContext(
 		GamesContext
@@ -29,12 +37,11 @@ const useGames = () => {
 		}
 		try {
 			// Set to any because left hand operator must be of type any, int, bigInt (js?)
-			const endDate: any = date;
 			const gamesRes = await handleAsyncToast(
 				get(gamesUrl('filter'), {
 					params: {
 						startDate: date,
-						endDate: new Date(endDate - 1)
+						endDate: addDays(date, 1)
 					}
 				}),
 				{

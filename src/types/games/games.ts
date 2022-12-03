@@ -1,15 +1,16 @@
 export type GuestT = {
 	name: string;
 	membership: string | null;
-	bill: number;
+	_id: string;
 };
 
 export type GameT = {
 	_id: string;
 	memberId: string;
+	memberName: string;
 	clubId: string;
 	membership: string;
-	date: string;
+	date: Date;
 	status: string;
 	guests: GuestT[] | null;
 };

@@ -2,17 +2,12 @@ import { Grid } from '@chakra-ui/react';
 import MatchCard from './MatchCard';
 import { useGames } from '@/hooks';
 import { GameT } from '@/types';
-import { dummyGames, fillGames } from './utils';
+import { fillGames } from './utils';
 import { useEffect, useState } from 'react';
-
+import MatchSkeleton from './MatchSkeleton';
 // Constant Values
 const startingHour: number = 7; // Should be provided by club?
 const finishingHour: number = 18; // Should be provided by club?
-
-const renderMatchCard = (game: GameT, index: number) => {
-	const key = `${game._id}-${index}`;
-	return <MatchCard game={game} key={key} />;
-};
 
 const HourSchedule = () => {
 	const { gameDailySchedule } = useGames();
@@ -20,7 +15,11 @@ const HourSchedule = () => {
 
 	useEffect(() => {
 		if (gameDailySchedule == null) return;
-		const gameScheduleFill = fillGames(dummyGames, startingHour, finishingHour);
+		const gameScheduleFill = fillGames(
+			gameDailySchedule,
+			startingHour,
+			finishingHour
+		);
 		setGameSchedule(gameScheduleFill);
 	}, [gameDailySchedule]);
 
@@ -38,9 +37,11 @@ const HourSchedule = () => {
 			}}
 		>
 			{gameSchedule.length < 1 ? (
-				<>Skeleton</>
+				<MatchSkeleton />
 			) : (
-				gameSchedule.map((game, index) => renderMatchCard(game, index))
+				gameSchedule.map((game, index) => (
+					<MatchCard game={game} key={`${game._id}-${index}`} />
+				))
 			)}
 		</Grid>
 	);
