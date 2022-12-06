@@ -1,7 +1,18 @@
 import { Box, Heading, Text, Button, Center } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 const NoMatch = () => {
 	const navigate = useNavigate();
+	const location = useLocation();
+	const handleReturn = () => {
+		const locationUrl = location.pathname.split('/');
+		if (locationUrl.includes('admin')) {
+			navigate('/admin');
+		} else if (locationUrl.includes('user')) {
+			navigate('/user');
+		} else {
+			navigate('/');
+		}
+	};
 	return (
 		<Center h="100vh" maxH="100%">
 			<Box textAlign="center" py={10} px={6}>
@@ -31,7 +42,7 @@ const NoMatch = () => {
 						borderColor: 'brand.primary'
 					}}
 					color="white"
-					onClick={() => navigate('/')}
+					onClick={handleReturn}
 				>
 					Ir al inicio
 				</Button>
