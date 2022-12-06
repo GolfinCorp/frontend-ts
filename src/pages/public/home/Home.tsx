@@ -21,7 +21,7 @@ function Home() {
 	return (
 		<>
 			<Container bgColor="#F0F0F0" minH="100vh" position="relative">
-				<HomeHeader />
+				<HomeHeader entryAnimation={entryAnimation} />
 				<HeroImg entryAnimation={entryAnimation} />
 				<CustomButtom />
 			</Container>

@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { Tr, Td, Badge, Text, Box, useDisclosure } from '@chakra-ui/react';
 import { Drawer } from '@/components';
 import MemberDrawer from './MemberDrawer/MemberDrawer';
-import { MemberT } from '@/types';
+import { MemberT, GameT } from '@/types';
 
 type MembersTrPropType = {
 	member: MemberT;
@@ -36,8 +36,8 @@ const MembersTr = ({ member }: MembersTrPropType) => {
 
 type memberListPropsT = {
 	searchTerm: string;
-	searchMembers: [] | null;
-	members: [];
+	searchMembers: MemberT[] | undefined;
+	members: MemberT[];
 };
 const MemberList = ({
 	searchTerm,

@@ -4,6 +4,7 @@ import Form from '../Form/Form';
 import UpdatePassword from '../UpdatePassword/UpdatePassword';
 import DeleteMember from '../MemberDelete/DeleteMember';
 import { SubmitHandler } from 'react-hook-form';
+import { MemberT } from '@/types';
 
 type fieldsT = {
 	firstName: string;
@@ -30,20 +31,20 @@ const MemberDrawer = ({ onClose, id }: propsT) => {
 		onClose();
 	};
 
-	const passwordSubmit: SubmitHandler<passwordT> = async (member) => {
-		const updateResponse = await updateMember(member, id);
-		if (!updateResponse) return;
-		onClose();
-	};
+	// const passwordSubmit: SubmitHandler<passwordT> = async (member) => {
+	// 	const updateResponse = await updateMember(member, id);
+	// 	if (!updateResponse) return;
+	// 	onClose();
+	// };
 
 	return (
 		<>
 			<DrawerBody>
 				<Form btnContent="Actualizar" submitMember={handleSubmit} />
 				<Divider my="5" />
-				<Box>
+				{/* <Box>
 					<UpdatePassword submitPassword={passwordSubmit} />
-				</Box>
+				</Box> */}
 			</DrawerBody>
 			<DrawerFooter>
 				<DeleteMember onClose={onClose} id={id} />

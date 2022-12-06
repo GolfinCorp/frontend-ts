@@ -34,7 +34,12 @@ const useMembers = () => {
 		}
 	};
 
-	const createMember = async (member: MemberT) => {
+	const createMember = async (member: {
+		firstName: string;
+		lastname: string;
+		email: string;
+		membership: number;
+	}) => {
 		/**
 		 * * Handles new member creation & calls getMembers() onSuccess
 		 * @return boolean { true: success || false: failure }
@@ -65,7 +70,10 @@ const useMembers = () => {
 		}
 	};
 
-	const updateMember = async (member: MemberT, id: string) => {
+	const updateMember = async (
+		member: { firstName: string; lastname: string; membership: number },
+		id: string
+	) => {
 		/**
 		 * * Handles patching member and updating members context
 		 * @return boolean { true: success || false: failure }
@@ -136,7 +144,7 @@ const useMembers = () => {
 		createMember,
 		updateMember,
 		deleteMember,
-		...useContext(MembersContext)
+		members
 	};
 };
 

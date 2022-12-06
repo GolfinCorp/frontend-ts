@@ -6,12 +6,13 @@ import { Searchbar } from '@/components';
 import { DateFlex } from '@/components/molecules';
 import { MemberList, MemberModal } from './components';
 import { MemberT } from '@/types';
+import { MemberContextT } from '@/contexts/types.context';
 // Constante
 const TABLE_HEADERS = ['Nombre', 'Apellido', 'Membresía', 'Estado'];
 
 const Members = () => {
 	// variables, estados y hooks
-	const [searchMembers, setSearchMembers] = useState<[] | null>(null);
+	const [searchMembers, setSearchMembers] = useState<MemberT[]>();
 	const [searchTerm, setSearchTerm] = useState('');
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const { getMembers, members } = useMembers();
@@ -23,6 +24,7 @@ const Members = () => {
 				member.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
 				member.lastname.toLowerCase().includes(searchTerm.toLowerCase())
 		);
+
 		setSearchMembers(searchedResults);
 	};
 
